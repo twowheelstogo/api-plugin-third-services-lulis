@@ -1,31 +1,32 @@
 {
-  "name": "@reactioncommerce/api-plugin-example",
-  "description": "Boilerplate Example plugin for the Reaction API",
+  "name": "@reactioncommerce/third-services-lulis",
+  "description": "all services that need e-commerce",
   "version": "0.0.0-development",
   "main": "index.js",
   "type": "module",
   "engines": {
     "node": ">=12.14.1"
   },
-  "homepage": "https://github.com/reactioncommerce/api-plugin-example",
-  "url": "https://github.com/reactioncommerce/api-plugin-example",
+  "homepage": "https://github.com/twowheelstogo/api-plugin-third-services-lulis",
+  "url": "https://github.com/twowheelstogo/api-plugin-third-services-lulis",
   "email": "engineering@reactioncommerce.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reactioncommerce/api-plugin-example.git"
+    "url": "git+https://github.com/twowheelstogo/api-plugin-third-services-lulis.git"
   },
   "author": {
-    "name": "Reaction Commerce",
-    "email": "engineering@reactioncommerce.com",
-    "url": "https://reactioncommerce.com"
+    "name": "Delivery lab"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/reactioncommerce/api-plugin-example/issues"
+    "url": "https://github.com/twowheelstogo/api-plugin-third-services-lulis/issues"
   },
   "sideEffects": false,
   "dependencies": {
-    "@reactioncommerce/api-utils": "^1.16.5"
+    "@reactioncommerce/api-utils": "^1.16.5",
+    "@reactioncommerce/reaction-error": "^1.0.1",
+    "node-fetch": "~2.6.0",
+    "simpl-schema": "^1.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

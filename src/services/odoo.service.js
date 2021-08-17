@@ -11,6 +11,8 @@ export default async (body) => {
     }
   );
   if (!res.ok) {
+    console.log(res);
+    console.log(body);
     throw new Error("Error en la comunicación");
   }
   const data = await res.json();

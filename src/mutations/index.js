@@ -1,5 +1,5 @@
 import getOdooInvoice from "./odoo.mutation.js";
 
-export {
+export default {
   getOdooInvoice
 };

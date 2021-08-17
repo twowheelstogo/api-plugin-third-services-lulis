@@ -9,16 +9,16 @@ const ProductsModel = (order) => {
   order.shipping[0].items.forEach((prod) => {
     const product = {};
     product.name = prod.optionTitle || prod.variantTitle || UNDEFINED_PRODUCT_NAME;
-    product.price = prod.amount;
+    product.price = prod.subtotal;
     // eslint-disable-next-line camelcase
-    product.product_id = prod.price.amount;
+    product.product_id = prod.odooProduct;
     product.quantity = prod.quantity;
     products.push(product);
     tmpId = product.product_id;
   });
   products.push({
     name: SHIPPING_NAME,
-    price: order.shipmentMethod.rate,
+    price: order.shipping[0].invoice.shipping,
     quantity: 1,
     // eslint-disable-next-line camelcase
     product_id: tmpId
@@ -52,6 +52,7 @@ const OdooModel = (order) => {
   }
   odooModel.orderId = order._id;
   odooModel.products = ProductsModel(order);
+  return odooModel;
 };
 
 export default OdooModel;

@@ -1,5 +1,5 @@
 import pkg from "../package.json";
-import mutations from "./mutations";
+import mutations from "./mutations/index.js";
 /**
  * @summary Import and call this function to add this plugin to your API.
  * @param {ReactionAPI} app The ReactionAPI instance

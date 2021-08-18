@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 
 export default async (body) => {
   const invoiceUrl = process.env.INVOICE_URL;
+  console.log(body);
   const res = await fetch(
     `${invoiceUrl}/api/invoices`,
     {

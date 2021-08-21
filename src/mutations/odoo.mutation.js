@@ -11,6 +11,7 @@ export default async function getOdooInvoice(context, order) {
   try {
     return await OdooService(odooModel);
   } catch (error) {
+    console.log(error);
     throw new ReactionError(5, "Error al momento de generar la factura");
   }
 }

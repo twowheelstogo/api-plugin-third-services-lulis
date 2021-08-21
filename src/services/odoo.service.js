@@ -15,5 +15,5 @@ export default async (body) => {
     throw new Error("Error en la comunicación");
   }
   const data = await res.json();
-  return data.order.id;
+  return data.order;
 };

@@ -39,19 +39,33 @@ const OdooModel = (order) => {
   }
   odooModel.mobile = "";
   if (order.billing) {
-    odooModel.street = order.billing.address;
+    odooModel.street = order.billing.address || "GUATEMALA";
   } else {
     odooModel.street = "";
   }
   odooModel.razon = odooModel.name;
   odooModel.city = CITY;
   if (order.billing) {
-    odooModel.vat = order.billing.nit;
+    odooModel.vat = order.billing.nit || "C/F";
   } else {
     odooModel.vat = CF;
   }
   odooModel.orderId = order._id;
   odooModel.products = ProductsModel(order);
+  if (order.shipping[0].invoice) {
+    if (order.shipping[0].invoice) {
+      odooModel.shipping = order.shipping[0].invoice.shipping || 0;
+    } else {
+      odooModel.shipping = 0;
+    }
+  } else {
+    odooModel.shipping = 0;
+  }
+  if (order.billing) {
+    odooModel.partnerId = order.billing.partnerId || -1;
+  } else {
+    odooModel.partnerId = -1;
+  }
   return odooModel;
 };
 

@@ -1,11 +1,9 @@
 const CF = "C/F";
 const CITY = "GUATEMALA";
 const UNDEFINED_PRODUCT_NAME = "SIN NOMBRE DEL PRODUCTO";
-const SHIPPING_NAME = "Costo por envío";
 
 const ProductsModel = (order) => {
   const products = [];
-  let tmpId = "";
   order.shipping[0].items.forEach((prod) => {
     const product = {};
     product.name = prod.optionTitle || prod.variantTitle || UNDEFINED_PRODUCT_NAME;
@@ -14,14 +12,6 @@ const ProductsModel = (order) => {
     product.product_id = prod.odooProduct;
     product.quantity = prod.quantity;
     products.push(product);
-    tmpId = product.product_id;
-  });
-  products.push({
-    name: SHIPPING_NAME,
-    price: order.shipping[0].invoice.shipping,
-    quantity: 1,
-    // eslint-disable-next-line camelcase
-    product_id: tmpId
   });
   return products;
 };

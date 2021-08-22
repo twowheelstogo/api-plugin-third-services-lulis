@@ -8,11 +8,9 @@ import { OdooModel } from "../models/index.js";
  */
 export default async function getOdooInvoice(context, order) {
   const odooModel = OdooModel(order);
-  console.log("odoomodel",odooModel);
   try {
     return await OdooService(odooModel);
   } catch (error) {
-    console.log(error);
     throw new ReactionError(5, "Error al momento de generar la factura");
   }
 }

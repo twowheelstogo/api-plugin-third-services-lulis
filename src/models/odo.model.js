@@ -9,7 +9,7 @@ const ProductsModel = (order) => {
     product.name = prod.optionTitle || prod.variantTitle || UNDEFINED_PRODUCT_NAME;
     product.price = prod.subtotal;
     // eslint-disable-next-line camelcase
-    product.product_id = prod.odooProduct;
+    product.product_id = 1504; //prod.odooProduct;
     product.quantity = prod.quantity;
     products.push(product);
   });

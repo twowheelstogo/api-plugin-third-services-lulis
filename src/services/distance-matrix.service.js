@@ -17,6 +17,7 @@ export default async (geopoint) => {
       method: "GET"
     }
   );
+  console.log("res.ok",res.ok);
   if (!res.ok) {
     return {
       text: "0 km",
@@ -24,16 +25,21 @@ export default async (geopoint) => {
     };
   }
   const data = await res.json();
+  console.log("data.status",data.status);
   if (data.status !== "OK") {
     return {
       text: "0 km",
       value: 0
     };
   }
+  console.log("data.rows[0]",data.rows[0]);
   if (data.rows[0]) {
+    console.log("data.rows[0].elements",data.rows[0].elements);
     if (data.rows[0].elements) {
+        console.log("data.rows[0].elements.distance",data.rows[0].elements.distance);
       if (data.rows[0].elements.distance) {
         data.rows[0].elements.distance.value /= 1000;
+        console.log("data.rows[0].elements.distance",data.rows[0].elements.distance);
         return data.rows[0].elements.distance;
       }
     }

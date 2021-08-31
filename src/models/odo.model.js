@@ -12,6 +12,18 @@ const ProductsModel = (order) => {
     product.product_id = 1504; //prod.odooProduct;
     product.quantity = prod.quantity;
     products.push(product);
+    if (Array.isArray(prod.metafields)) {
+      prod.metafields.forEach((_sub) => {
+        const subProduct = {};
+        const jsonSub = JSON.parse(_sub.value);
+        subProduct.name = jsonSub.title || jsonSub.pageTitle || UNDEFINED_PRODUCT_NAME;
+        subProduct.price = 0;
+        // eslint-disable-next-line camelcase
+        subProduct.product_id = 1504; //jsonSub.odooProduct;
+        subProduct.quantity = jsonSub.quantity;
+        products.push(subProduct);
+      });
+    }
   });
   return products;
 };

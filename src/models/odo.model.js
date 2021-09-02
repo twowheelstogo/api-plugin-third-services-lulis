@@ -9,7 +9,7 @@ const ProductsModel = (order) => {
     product.name = prod.optionTitle || prod.variantTitle || UNDEFINED_PRODUCT_NAME;
     product.price = prod.subtotal;
     // eslint-disable-next-line camelcase
-    product.product_id = 1504; //prod.odooProduct;
+    product.product_id = prod.odooProduct;
     product.quantity = prod.quantity;
     products.push(product);
     if (Array.isArray(prod.metafields)) {
@@ -19,7 +19,7 @@ const ProductsModel = (order) => {
         subProduct.name = jsonSub.title || jsonSub.pageTitle || UNDEFINED_PRODUCT_NAME;
         subProduct.price = 0;
         // eslint-disable-next-line camelcase
-        subProduct.product_id = 1504; //jsonSub.odooProduct;
+        subProduct.product_id = jsonSub.odooProduct;
         subProduct.quantity = jsonSub.quantity;
         products.push(subProduct);
       });
@@ -68,6 +68,7 @@ const OdooModel = (order) => {
   } else {
     odooModel.partnerId = -1;
   }
+  console.log("odooModel",odooModel);
   return odooModel;
 };
 

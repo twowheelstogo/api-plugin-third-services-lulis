@@ -68,7 +68,6 @@ const OdooModel = (order) => {
   } else {
     odooModel.partnerId = -1;
   }
-  console.log("odooModel",odooModel);
   return odooModel;
 };
 

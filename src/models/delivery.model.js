@@ -1,4 +1,3 @@
-
 const DeliveryModel = (order) => {
   const delivery = {};
   delivery.address = order.shipping[0].address.address || "SIN DIRECCION";

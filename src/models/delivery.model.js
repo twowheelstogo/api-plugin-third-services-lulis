@@ -1,8 +1,17 @@
-const DeliveryModel = (order) => {
+const DeliveryModel = (order, account) => {
   const delivery = {};
-  delivery.address = order.shipping[0].address.address || "SIN DIRECCION";
+  delivery.address = `${order.shipping[0].address.address ||
+    "SIN DIRECCIÓN"}, ${order.shipping[0].address.description ||
+    "SIN DESCRIPCIÓN"}, ${order.shipping[0].address.reference ||
+    "SIN REFERENCIA"}`;
   delivery.orderId = order.orderId;
-  delivery.name = order.email;
+  if (account.profile) {
+    delivery.phone = account.profile.phone || "00000000";
+    delivery.name = account.profile.name || "SIN NOMBRE";
+  } else {
+    delivery.phone = "00000000";
+    delivery.name = "SIN NOMBRE";
+  }
   delivery.lat = order.shipping[0].address.geolocation.latitude || 14.6262096;
   delivery.lon = order.shipping[0].address.geolocation.longitude || -90.5626013;
   delivery.depto = "SIN DEPARTAMENTO";

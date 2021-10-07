@@ -9,7 +9,11 @@ import { OdooModel, DeliveryModel } from "../models/index.js";
 export default async function getOdooInvoice(context, order) {
   if (order.shipping[0].address) {
     try {
-      const deliveryModel = DeliveryModel(order);
+      const { collections } = context;
+      const { Accounts } = collections;
+      const account = await Accounts.findOne({ _id: order.accountId });
+
+      const deliveryModel = DeliveryModel(order, account);
       await DeliveryService(deliveryModel);
       // eslint-disable-next-line no-empty
     } catch (error) {}

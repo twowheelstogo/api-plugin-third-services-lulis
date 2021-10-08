@@ -7,7 +7,6 @@ import { OdooModel, DeliveryModel } from "../models/index.js";
  * @returns {Number} orderId Odoo Id
  */
 export default async function getOdooInvoice(context, order) {
-  console.log("order.shipping[0].address", order.shipping[0].address);
   if (order.shipping[0].address) {
     try {
       const { collections } = context;

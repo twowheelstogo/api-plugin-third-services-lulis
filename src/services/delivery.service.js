@@ -1,7 +1,6 @@
 import fetch from "node-fetch";
 
 export default async (body) => {
-  console.log("body", body);
   const deliveryUrl = process.env.DELIVERY_URL;
   const url = `${deliveryUrl}/api/v1/deliveries`;
   const res = await fetch(url, {
@@ -10,7 +9,6 @@ export default async (body) => {
     headers: { "Content-Type": "application/json" }
   });
   if (!res.ok) {
-    console.log(res);
     throw new Error("Error en la comunicación");
   }
   const data = await res.json();

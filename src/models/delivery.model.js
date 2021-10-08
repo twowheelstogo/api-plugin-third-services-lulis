@@ -4,7 +4,7 @@ const DeliveryModel = (order, account) => {
     "SIN DIRECCIÓN"}, ${order.shipping[0].address.description ||
     "SIN DESCRIPCIÓN"}, ${order.shipping[0].address.reference ||
     "SIN REFERENCIA"}`;
-  delivery.orderId = order.orderId;
+  delivery.orderId = `${order.orderId}`;
   if (account.profile) {
     delivery.phone = account.profile.phone || "00000000";
     delivery.name = account.profile.name || "SIN NOMBRE";

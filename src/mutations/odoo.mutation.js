@@ -16,7 +16,9 @@ export default async function getOdooInvoice(context, order) {
       const deliveryModel = DeliveryModel(order, account);
       await DeliveryService(deliveryModel);
       // eslint-disable-next-line no-empty
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
   const odooModel = OdooModel(order);
   try {

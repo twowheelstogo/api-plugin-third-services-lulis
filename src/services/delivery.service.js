@@ -9,6 +9,7 @@ export default async (body) => {
     headers: { "Content-Type": "application/json" }
   });
   if (!res.ok) {
+    console.log(res);
     throw new Error("Error en la comunicación");
   }
   const data = await res.json();

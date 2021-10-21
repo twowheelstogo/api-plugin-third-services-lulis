@@ -6,23 +6,33 @@ const ProductsModel = (order) => {
   const products = [];
   order.shipping[0].items.forEach((prod) => {
     const product = {};
-    product.name = prod.optionTitle || prod.variantTitle || UNDEFINED_PRODUCT_NAME;
+    product.name =
+      prod.optionTitle || prod.variantTitle || UNDEFINED_PRODUCT_NAME;
     product.price = prod.subtotal;
     // eslint-disable-next-line camelcase
     product.product_id = prod.odooProduct;
     product.quantity = prod.quantity;
     products.push(product);
     if (Array.isArray(prod.metafields)) {
-      prod.metafields.forEach((_sub) => {
-        const subProduct = {};
-        const jsonSub = JSON.parse(_sub.value);
-        subProduct.name = jsonSub.title || jsonSub.pageTitle || UNDEFINED_PRODUCT_NAME;
-        subProduct.price = 0;
-        // eslint-disable-next-line camelcase
-        subProduct.product_id = jsonSub.odooProduct;
-        subProduct.quantity = jsonSub.quantity;
-        products.push(subProduct);
-      });
+      if (prod.metafields.length > 0) {
+        prod.metafields.forEach((_sub) => {
+          const jsonSub = JSON.parse(_sub.value);
+          if (Array.isArray(jsonSub)) {
+            if (jsonSub.length > 0) {
+              jsonSub.forEach((subbox) => {
+                const subProduct = {};
+                subProduct.name =
+                  subbox.title || subbox.pageTitle || UNDEFINED_PRODUCT_NAME;
+                subProduct.price = 0;
+                // eslint-disable-next-line camelcase
+                subProduct.product_id = subbox.odooProduct;
+                subProduct.quantity = subbox.quantity;
+                products.push(subProduct);
+              });
+            }
+          }
+        });
+      }
     }
   });
   return products;
@@ -72,4 +82,3 @@ const OdooModel = (order) => {
 };
 
 export default OdooModel;
-

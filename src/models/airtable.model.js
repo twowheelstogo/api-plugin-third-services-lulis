@@ -38,18 +38,22 @@ const AirtableModel = (order, account) => {
     customerEmail: order.email || process.env.EMAIL_FILESYSTEM,
     branch: "OFIBODEGAS PRADERA",
     company: "LULIS",
-    createdAt: now.toISOString()
+    createdAt: now.toISOString(),
+    idcustomer: order.accountId || "SIN IDENTIFICADOR",
+    ordenNumber: order.orderId.toString() || "SIN NÚMERO DE ORDEN"
   };
   if (account.profile) {
     airtable.customer = account.profile.name || "SIN NOMBRE";
+    airtable.phone = account.profile.phone || "SIN TELEFONO";
   } else {
     airtable.customer = "SIN NOMBRE";
+    airtable.phone = "SIN TELEFONO";
   }
   if (order.shipping) {
     if (order.shipping[0]) {
       if (order.shipping[0].shipmentMethod) {
         airtable.shipping =
-          order.shipping[0].shipmentMethod.name || "SIN SHIPPING";
+          order.shipping[0].shipmentMethod.name || "S3IN SHIPPING";
       } else {
         airtable.shipping = "SIN SHIPPING";
       }
@@ -70,6 +74,19 @@ const AirtableModel = (order, account) => {
   } else {
     airtable.razon = "SIN NOMBRE DE RAZÓN";
     airtable.vat = "SIN NIT";
+  }
+  if (order.shipping) {
+    if (order.shipping[0]) {
+      if (order.shipping[0].address) {
+        airtable.placeDelivery = order.shipping[0].address.description;
+      } else {
+        airtable.placeDelivery = "SIN ALIAS DE NOMBRE DE LUGAR";
+      }
+    } else {
+      airtable.placeDelivery = "SIN ALIAS DE NOMBRE DE LUGAR";
+    }
+  } else {
+    airtable.placeDelivery = "SIN ALIAS DE NOMBRE DE LUGAR";
   }
   airtable.products = ProductsModel(order);
   return airtable;

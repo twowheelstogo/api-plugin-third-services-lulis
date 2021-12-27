@@ -21,6 +21,12 @@ const DeliveryModel = (order, account) => {
     id: 1,
     distance: order.shipping[0].address.metaddress.distance.value
   };
+  if (order.deliveryDate) {
+    delivery.createdAt = new Date(order.deliveryDate);
+  } else {
+    delivery.createdAt = new Date();
+  }
+  delivery.createdAt = delivery.createdAt.toISOString();
   return delivery;
 };
 

@@ -19,7 +19,7 @@ const DeliveryModel = (order, account, branch) => {
   if (branch) {
     if (branch.generalData) {
       if (branch.generalData.deliveryCode) {
-        delivery.branchId = branch.generalData.deliveryCode;
+        delivery.branchId = branch.generalData.deliveryCode || "";
       } else {
         delivery.branchId = "";
       }

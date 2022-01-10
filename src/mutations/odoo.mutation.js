@@ -12,7 +12,7 @@ import { OdooModel, DeliveryModel, AirtableModel } from "../models/index.js";
  */
 export default async function getOdooInvoice(context, order) {
   const { collections } = context;
-  const { Accounts } = collections;
+  const { Accounts, Branches } = collections;
   const account = await Accounts.findOne({ _id: order.accountId });
   try {
     const airtableModel = AirtableModel(order, account);
@@ -23,7 +23,17 @@ export default async function getOdooInvoice(context, order) {
   }
   if (order.shipping[0].address) {
     try {
-      const deliveryModel = DeliveryModel(order, account);
+      let branch = null;
+      if (order.shipping[0].type === "pickup") {
+        branch = await Branches.findOne({
+          _id: order.shipping[0].pickupDetails.branchId
+        });
+      } else {
+        branch = await Branches.findOne({
+          _id: order.shipping[0].address.metaddress.distance.branchId
+        });
+      }
+      const deliveryModel = DeliveryModel(order, account, branch);
       await DeliveryService(deliveryModel);
       // eslint-disable-next-line no-empty
     } catch (error) {

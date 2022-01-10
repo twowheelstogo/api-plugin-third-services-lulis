@@ -11,6 +11,19 @@ const DeliveryModel = (order, account, branch) => {
   delivery.depto = "SIN DEPARTAMENTO";
   delivery.munic = "SIN MUNICIPIP";
   delivery.zone = 0;
+  if (branch) {
+    if (branch.generalData) {
+      if (branch.generalData.deliveryCode) {
+        delivery.branchId = branch.generalData.deliveryCode;
+      } else {
+        delivery.branchId = "";
+      }
+    } else {
+      delivery.branchId = "";
+    }
+  } else {
+    delivery.branchId = "";
+  }
   if (order.shipping[0].type === "pickup") {
     const [_date, _time] = order.shipping[0].pickupDetails.datetime.split(" ");
     const [_year, _month, _day] = _date.split("-");
@@ -46,7 +59,6 @@ const DeliveryModel = (order, account, branch) => {
     };
     delivery.createdAt = new Date();
   }
-  delivery.branchId = branch.generalData.deliveryCode;
 
   delivery.createdAt = delivery.createdAt.toISOString();
   return delivery;

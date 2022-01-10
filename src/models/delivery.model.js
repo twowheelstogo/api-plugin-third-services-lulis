@@ -1,16 +1,21 @@
 const DeliveryModel = (order, account, branch) => {
   const delivery = {};
   delivery.orderId = `${order.orderId}`;
-  if (account.profile) {
-    delivery.phone = account.profile.phone || "00000000";
-    delivery.name = account.profile.name || "SIN NOMBRE";
+  delivery.depto = "SIN DEPARTAMENTO";
+  delivery.munic = "SIN MUNICIPIP";
+  delivery.zone = 0;
+  if (account) {
+    if (account.profile) {
+      delivery.phone = account.profile.phone || "00000000";
+      delivery.name = account.profile.name || "SIN NOMBRE";
+    } else {
+      delivery.phone = "00000000";
+      delivery.name = "SIN NOMBRE";
+    }
   } else {
     delivery.phone = "00000000";
     delivery.name = "SIN NOMBRE";
   }
-  delivery.depto = "SIN DEPARTAMENTO";
-  delivery.munic = "SIN MUNICIPIP";
-  delivery.zone = 0;
   if (branch) {
     if (branch.generalData) {
       if (branch.generalData.deliveryCode) {

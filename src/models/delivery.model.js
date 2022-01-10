@@ -21,8 +21,17 @@ const DeliveryModel = (order, account) => {
     id: 1,
     distance: order.shipping[0].address.metaddress.distance.value
   };
-  if (order.deliveryDate) {
-    delivery.createdAt = new Date(order.deliveryDate);
+  if (order.shipping[0].type === "pickup") {
+    const [_date, _time] = order.shipping[0].pickupDetails.datetime.split(" ");
+    const [_year, _month, _day] = _date.split("-");
+    const [_hours, _minutes] = _time.split(":");
+    delivery.createdAt = new Date(
+      +_year,
+      +_month - 1,
+      +_day,
+      +_hours,
+      +_minutes
+    );
   } else {
     delivery.createdAt = new Date();
   }

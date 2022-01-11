@@ -40,11 +40,14 @@ const DeliveryModel = (order, account, branch) => {
       +_hours,
       +_minutes
     );
-    delivery.address = branch.generalData.address;
+    delivery.address = "20 calle 24-60 zona 10 Ofibodega pradera bodega 15 Guatemala, 01010";
+    delivery.lat = 0;
+    delivery.lon = 0;
+    //delivery.address = branch.generalData.address;
     // eslint-disable-next-line prefer-destructuring
-    delivery.lat = branch.geographyData.point.coordinates[1];
+    //delivery.lat = branch.geographyData.point.coordinates[1];
     // eslint-disable-next-line prefer-destructuring
-    delivery.lon = branch.geographyData.point.coordinates[0];
+    //delivery.lon = branch.geographyData.point.coordinates[0];
     delivery.circle = {
       id: 1,
       distance: 1

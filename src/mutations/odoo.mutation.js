@@ -21,14 +21,8 @@ export default async function getOdooInvoice(context, order) {
     // eslint-disable-next-line no-console
     console.log(error2);
   }
-  console.log("entra");
-  console.log("esta es la order");
-  let tmp = JSON.stringify(order);
-  console.log(tmp)
   if (order.shipping[0].address) {
-    console.log("entra 2");
     try {
-      console.log("entra 3");
       let branch = null;
       if (order.shipping[0].type === "pickup") {
         branch = await Branches.findOne({
@@ -39,9 +33,7 @@ export default async function getOdooInvoice(context, order) {
           _id: order.shipping[0].address.metaddress.distance.branchId
         });
       }
-      console.log("antes de delivery model");
       const deliveryModel = DeliveryModel(order, account, branch);
-      console.log("delivery model", deliveryModel);
       await DeliveryService(deliveryModel);
       // eslint-disable-next-line no-empty
     } catch (error) {

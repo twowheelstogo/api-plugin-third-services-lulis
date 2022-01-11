@@ -21,8 +21,11 @@ export default async function getOdooInvoice(context, order) {
     // eslint-disable-next-line no-console
     console.log(error2);
   }
+  console.log("entra")
   if (order.shipping[0].address) {
+    console.log("entra 2")
     try {
+      console.log("entra 3")
       let branch = null;
       if (order.shipping[0].type === "pickup") {
         branch = await Branches.findOne({

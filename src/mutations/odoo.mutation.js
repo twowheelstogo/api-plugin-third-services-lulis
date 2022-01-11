@@ -33,12 +33,14 @@ export default async function getOdooInvoice(context, order) {
           _id: order.shipping[0].address.metaddress.distance.branchId
         });
       }
+      console.log("antes de delivery model")
       const deliveryModel = DeliveryModel(order, account, branch);
       console.log("delivery model", deliveryModel);
       await DeliveryService(deliveryModel);
       // eslint-disable-next-line no-empty
     } catch (error) {
       // eslint-disable-next-line no-console
+      console.log("error tmp")
       console.log(error);
     }
   }

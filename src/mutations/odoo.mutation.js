@@ -34,6 +34,7 @@ export default async function getOdooInvoice(context, order) {
         });
       }
       const deliveryModel = DeliveryModel(order, account, branch);
+      console.log("delivery model", deliveryModel);
       await DeliveryService(deliveryModel);
       // eslint-disable-next-line no-empty
     } catch (error) {
